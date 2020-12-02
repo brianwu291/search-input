@@ -1,6 +1,6 @@
 {
   "name": "search-input",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "",
   "main": "dist/index.min.js",
   "scripts": {
@@ -8,6 +8,26 @@
     "build": "rm -rf dist/ && rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": ">=12"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brianwu291/search-input.git"
+  },
+  "homepage": "https://github.com/brianwu291/search-input",
+  "bugs": {
+    "url": "https://github.com/brianwu291/search-input/issues"
+  },
+  "keywords": [
+    "search input",
+    "debounce search",
+    "rx",
+    "event pipe"
+  ],
   "author": "BrianWu",
   "license": "MIT",
   "devDependencies": {
