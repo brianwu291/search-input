@@ -8,6 +8,18 @@
     "build": "rm -rf dist/ && rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": ">=12"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "search input",
+    "debounce search",
+    "rx",
+    "event pipe"
+  ],
   "author": "BrianWu",
   "license": "MIT",
   "devDependencies": {
