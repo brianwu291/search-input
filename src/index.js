@@ -1,20 +1,52 @@
-const benchmarker = (testFunction, times = 1000000) => {
-  if (typeof testFunction !== 'function') {
-    throw new Error('Did not provide a valid function for test.');
+const handleRequest = require('./handleRequest');
+const { createInputElement } = require('./createElement');
+const { getIsBrowser } = require('./judgeEnvironment');
+
+function generateSearchStuff(method = 'GET', route, handleCallbacks = {}) {
+  if (!getIsBrowser() || !route) throw new Error('this works on browser only. And route should be provided.');
+  let response = null, error = null, isSearching = false, RequestRef = null;
+  function handleReqStart() {
+    isSearching = true;
   }
-
-  const startTime = new Date().getTime();
-
-  let i = 0;
-  while (i < times) {
-    i++;
-    testFunction();
+  function handleGetResponse () {
+    response = this.response;
+    error = null;
+    isSearching = false;
   }
+  function handleFailResponse () {
+    error = this.response;
+    response = null;
+    isSearching = false;
+  }
+  const callbacks = {
+    ...handleCallbacks,
+    handleReqStart,
+    handleGetResponse,
+    handleFailResponse,
+  }
+  function handleInputChange(e) {
+    const userInput = e.target.value;
+    if (userInput.trim() === '') {
+      isSearching = false;
+      return
+    }
+    if (userInput.trim()) {
+      if (RequestRef) {
+        RequestRef.abort();
+      }
+      const req = handleRequest(method, route, callbacks);
+      RequestRef = req;
+    }
+  }
+  const inputEle = createInputElement();
+  inputEle.addEventListener('input', handleInputChange);
+  return ({
+    inputEle,
+    response,
+    error,
+    isSearching,
+    RequestRef,
+  })
+}
 
-  const endTime = new Date().getTime();
-
-  return endTime - startTime;
-};
-
-// 匯出函式
-module.exports = benchmarker;
+module.exports = generateSearchStuff;
