@@ -1,16 +1,18 @@
 {
-  "name": "vanillaJS_search_suggestion",
+  "name": "vanillajs-lazy-loading-image",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.min.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "dev": "rollup -c -w",
+    "build": "rm -rf dist/ && rollup -c",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "BrianWu",
   "license": "MIT",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "nodemon": "^2.0.2"
+  "devDependencies": {
+    "npm": "^6.14.9",
+    "rollup": "^2.34.0",
+    "rollup-plugin-terser": "^7.0.2"
   }
 }
