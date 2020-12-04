@@ -13,13 +13,13 @@ function handleRequest(method = 'GET', route, handleCallbacks) {
       handleFailResponse = () => {},
     } = handleCallbacks
     const Req = new XMLHttpRequest();
-    Req.upload.addEventListener("loadstart", handleLoadStartListener);
-    Req.upload.addEventListener("loadstart", handleReqStart);
-    Req.upload.addEventListener("load", handleSuccessListener);
-    Req.upload.addEventListener("load", handleGetResponse);
-    Req.upload.addEventListener("error", handleFailListener);
-    Req.upload.addEventListener("error", handleFailResponse);
-    Req.upload.addEventListener("abort", handleCancelListener);
+    Req.addEventListener("loadstart", handleLoadStartListener);
+    Req.addEventListener("loadstart", handleReqStart);
+    Req.addEventListener("load", handleSuccessListener);
+    Req.addEventListener("load", handleGetResponse);
+    Req.addEventListener("error", handleFailListener);
+    Req.addEventListener("error", handleFailResponse);
+    Req.addEventListener("abort", handleCancelListener);
     Req.open(method, route);
     Req.send();
     return Req;
